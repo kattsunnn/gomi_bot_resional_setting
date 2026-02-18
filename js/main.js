@@ -1,4 +1,5 @@
 const CSV_FILE_PATH = './R8.1.1～R8.3.31.csv'; 
+const MY_LIFF_ID = '2009167903-NEWkAfll';
 
 let csvData = [];
 const select1 = document.getElementById('area1');
@@ -8,6 +9,7 @@ const saveBtn = document.getElementById('saveBtn');
 
 window.onload = async function() {
     try {
+        await liff.init({ liffId: MY_LIFF_ID });
         await loadCSV();
     } catch (e) {
         console.error(e);
@@ -145,15 +147,27 @@ function setNoneOption(el) {
     el.disabled = false;
 }
 
-function submitData() {
+async function submitData() {
     const result = {
         area1: select1.value,
         area2: select2.value === "なし" ? "" : select2.value,
         area3: select3.value === "なし" ? "" : select3.value
     };
     
-    alert(`以下のデータを選択しました：\n${result.area1}, ${result.area2}, ${result.area3}`);
-    // 将来的にはここで liff.sendMessages() を呼び出します
+    const messageText  = `お住まいの地域：${result.area1}, ${result.area2}, ${result.area3}`
+    try {
+        await liff.sendMessages([
+            {
+                type: 'text',
+                text: messageText
+            }
+        ]);
+        
+        liff.closeWindow();
+    } catch (error) {
+        alert("送信に失敗しました: " + error);
+        console.error("LIFF sendMessages Error:", error);
+    }
 }
 
 const areaSearch = document.getElementById('areaSearch');
