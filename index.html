@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゴミ収集地区設定</title>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>地域を選択してください</h1>
+
+        <div class="form-group">
+            <label for="areaSearch">地区1を検索</label>
+            <input type="text" id="areaSearch" placeholder="例: 曙町" >
+
+            <label for="area1">地区1（町名）</label>
+            <select id="area1">
+                <option value="">読み込み中...</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="area2">地区2（丁目・字）</label>
+            <select id="area2" disabled>
+                <option value="">選んでください</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="area3">地区3（その他）</label>
+            <select id="area3" disabled>
+                <option value="">地区2を選んでください</option>
+            </select>
+        </div>
+
+        <button id="saveBtn" onclick="submitData()" disabled>設定を保存する</button>
+       
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
