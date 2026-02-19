@@ -154,7 +154,7 @@ async function submitData() {
         area3: select3.value === "なし" ? "" : select3.value
     };
     
-    const messageText  = `${result.area1},${result.area2},${result.area3}`
+    const messageText  = `地域設定:${result.area1},${result.area2},${result.area3}`
     try {
         await liff.sendMessages([
             {
